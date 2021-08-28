@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
-//    id 'com.google.gms.google-services'
-//    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
     id 'kotlin-android'
 }
 
@@ -57,14 +57,14 @@ android {
 
     signingConfigs {
         release {
-//            try {
-//                keyAlias KEY_ALIAS
-//                keyPassword KEY_PASSWORD
-//                storeFile file(KEYSTORE_PATH)
-//                storePassword KEYSTORE_PASSWORD
-//            } catch (e) {
-//                throw new InvalidUserDataException("You must check all the variable in the gradle.properties file.")
-//            }
+            try {
+                keyAlias KEY_ALIAS
+                keyPassword KEY_PASSWORD
+                storeFile file(KEYSTORE_PATH)
+                storePassword KEYSTORE_PASSWORD
+            } catch (e) {
+                throw new InvalidUserDataException("You must check all the variable in the gradle.properties file.")
+            }
         }
     }
 
@@ -82,6 +82,7 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            resValue "string", "name_app", "WeSkill"
             resValue "string", "app_version",
                     "${defaultConfig.versionName}"
         }
@@ -117,8 +118,8 @@ dependencies {
 
     // region Firebase
 
-    implementation 'com.google.firebase:firebase-crashlytics:18.2.1'
-    implementation 'com.google.firebase:firebase-analytics:19.0.1'
+    implementation platform('com.google.firebase:firebase-bom:28.4.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     // endregion
 
