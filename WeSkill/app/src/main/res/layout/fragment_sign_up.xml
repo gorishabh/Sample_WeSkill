@@ -36,13 +36,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_gravity="center"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:padding="12dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Register"
+        android:gravity="center"
+        android:fontFamily="@font/montserrat"
+        android:text="Register with Google"
         android:textAllCaps="false"
-        app:cornerRadius="16dp" />
+        app:cornerRadius="16dp"
+        app:icon="@drawable/ic_logo_google" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fsu_exp_mtrBtn"
@@ -51,7 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:padding="12dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/montserrat_bold"
         android:text="Explore"

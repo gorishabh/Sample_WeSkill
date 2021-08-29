@@ -49,8 +49,7 @@ class SetupActivity : AppCompatActivity() {
         }
     }
 
-    private fun navigateToHome() {
-        Toast.makeText(this, "Navigating to Home!", Toast.LENGTH_SHORT).show()
+    fun navigateToHome() {
         startActivity(HomeActivity.start(applicationContext))
         finish()
     }

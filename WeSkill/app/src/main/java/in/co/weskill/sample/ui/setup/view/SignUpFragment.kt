@@ -63,6 +63,7 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.fsuRegMtrBtn.setOnClickListener { mActivity.signIn() }
+        binding.fsuExpMtrBtn.setOnClickListener { mActivity.navigateToHome() }
     }
 
     companion object {
