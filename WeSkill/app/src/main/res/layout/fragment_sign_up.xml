@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="220dp"
         android:background="@raw/star_blue_bg_new"
         android:orientation="vertical">
 
@@ -26,10 +26,40 @@
 
     </LinearLayout>
 
-    <FrameLayout
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:layout_weight="1" />-->
+
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:scaleType="centerCrop"
+        android:padding="32dp"
         android:layout_height="0dp"
+        android:src="@raw/sample"
         android:layout_weight="1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:text="@string/motto"
+        android:textColor="@color/blue_dark"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:maxLines="2"
+        android:gravity="center"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:maxLines="2"
+        android:text="Committed to Democratizing holistic education in India"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+        android:gravity="center"
+        android:layout_height="wrap_content"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/fsu_reg_mtrBtn"
@@ -37,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:padding="12dp"
         android:gravity="center"
@@ -53,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:padding="12dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/montserrat_bold"

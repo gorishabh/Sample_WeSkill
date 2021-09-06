@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -45,7 +46,7 @@ class SetupActivity : AppCompatActivity() {
     private fun navigateToSignUp() {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            add<SignUpFragment>(R.id.fragment_container_view)
+            replace<SignUpFragment>(R.id.fragment_container_view)
         }
     }
 
