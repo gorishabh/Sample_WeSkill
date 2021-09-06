@@ -62,6 +62,12 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
         simpleExoplayer.addListener(this)
     }
 
+    private fun preparePlayer(videoUrl: String, type: String) {
+        val uri = Uri.parse(videoUrl)
+        val mediaSource = buildMediaSource(uri, type)
+        simpleExoplayer.prepare(mediaSource)
+    }
+
     private fun buildMediaSource(uri: Uri, type: String): MediaSource {
         return if (type == "dash") {
             DashMediaSource.Factory(dataSourceFactory)
@@ -70,12 +76,6 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
             ProgressiveMediaSource.Factory(dataSourceFactory)
                 .createMediaSource(uri)
         }
-    }
-
-    private fun preparePlayer(videoUrl: String, type: String) {
-        val uri = Uri.parse(videoUrl)
-        val mediaSource = buildMediaSource(uri, type)
-        simpleExoplayer.prepare(mediaSource)
     }
 
     private fun releasePlayer() {
@@ -88,11 +88,13 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
     }
 
     override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
-        if (playbackState == Player.STATE_BUFFERING)
-            binding.progressBar.visibility = View.VISIBLE
-        else if (playbackState == Player.STATE_READY || playbackState == Player.STATE_ENDED)
-            binding.progressBar.visibility = View.INVISIBLE
+        when (playbackState) {
+            Player.STATE_BUFFERING -> binding.progressBar.visibility = View.VISIBLE
+            Player.STATE_READY, Player.STATE_ENDED -> binding.progressBar.visibility = View.INVISIBLE
+            Player.STATE_IDLE -> {
+                TODO()
+            }
+        }
     }
-
 
 }
