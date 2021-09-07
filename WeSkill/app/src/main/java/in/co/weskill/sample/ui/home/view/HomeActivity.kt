@@ -1,19 +1,24 @@
 package `in`.co.weskill.sample.ui.home.view
 
 import `in`.co.weskill.sample.databinding.ActivityHomeBinding
+import `in`.co.weskill.sample.ui.home.view.HomeActivity.Companion.TAG
 import `in`.co.weskill.sample.ui.home.viewmodel.HomeActivityVM
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
+import com.google.android.exoplayer2.analytics.AnalyticsListener
 import com.google.android.exoplayer2.util.Util
+import timber.log.Timber
 
-class HomeActivity : AppCompatActivity(), Player.Listener {
+class HomeActivity : AppCompatActivity() {
 
     companion object {
 
@@ -21,6 +26,7 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
             return Intent(context, HomeActivity::class.java)
         }
 
+        const val TAG = "HomeActivity"
         private const val mp4Url: String = "https://html5demos.com/assets/dizzy.mp4"
         private const val mp3Url: String =
             "https://storage.googleapis.com/exoplayer-test-media-0/play.mp3"
@@ -40,6 +46,9 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
     private var playbackPosition = 0L
     private var currentWindow = 0
     private var playWhenReady = true
+
+    private val playbackStateListener: Player.Listener = playbackStateListener()
+    private val analyticsListener: AnalyticsListener = analyticsListener()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,6 +110,8 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
         binding.exoplayerView.player = simpleExoplayer
         simpleExoplayer.seekTo(currentWindow, playbackPosition)
         simpleExoplayer.playWhenReady = playWhenReady
+        simpleExoplayer.addListener(playbackStateListener)
+        simpleExoplayer.addAnalyticsListener(analyticsListener)
     }
 
     private fun releasePlayer() {
@@ -108,6 +119,8 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
             playbackPosition = currentPosition
             currentWindow = currentWindowIndex
             playWhenReady = playWhenReady
+            removeListener(playbackStateListener)
+            removeAnalyticsListener(analyticsListener)
             release()
         }
     }
@@ -129,4 +142,44 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
 
     // endregion
 
+}
+
+private fun playbackStateListener() = object : Player.Listener {
+    override fun onPlaybackStateChanged(playbackState: Int) {
+        val stateString: String = when (playbackState) {
+            ExoPlayer.STATE_IDLE -> "ExoPlayer.STATE_IDLE      -"
+            ExoPlayer.STATE_BUFFERING -> "ExoPlayer.STATE_BUFFERING -"
+            ExoPlayer.STATE_READY -> "ExoPlayer.STATE_READY     -"
+            ExoPlayer.STATE_ENDED -> "ExoPlayer.STATE_ENDED     -"
+            else -> "UNKNOWN_STATE             -"
+        }
+        Log.d(TAG , "State changed to $stateString")
+    }
+}
+
+private fun analyticsListener() = object : AnalyticsListener {
+    override fun onRenderedFirstFrame(
+        eventTime: AnalyticsListener.EventTime,
+        output: Any,
+        renderTimeMs: Long
+    ) {
+        Log.d(TAG ,"onRenderedFirstFrame")
+    }
+
+    override fun onDroppedVideoFrames(
+        eventTime: AnalyticsListener.EventTime,
+        droppedFrames: Int,
+        elapsedMs: Long
+    ) {
+        Log.d(TAG ,"onDroppedVideoFrames")
+    }
+
+    override fun onAudioUnderrun(
+        eventTime: AnalyticsListener.EventTime,
+        bufferSize: Int,
+        bufferSizeMs: Long,
+        elapsedSinceLastFeedMs: Long
+    ) {
+        Log.d(TAG ,"onAudioUnderrun")
+    }
 }

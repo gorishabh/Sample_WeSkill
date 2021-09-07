@@ -95,6 +95,11 @@ android {
             initWith release
             debuggable true
         }
+        releaseDebuggableWithoutPro {
+            initWith release
+            minifyEnabled false
+            debuggable true
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "439711863661",
+    "project_id": "weskill-4b466",
+    "storage_bucket": "weskill-4b466.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439711863661:android:912bbe0548183595f50064",
+        "android_client_info": {
+          "package_name": "in.co.weskill.sample"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439711863661-5g0qfl16eunqu943t81l7m7ck8nhov0u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.co.weskill.sample",
+            "certificate_hash": "53f7a9683e739957d703a9f5fa28263e67468a22"
+          }
+        },
+        {
+          "client_id": "439711863661-7k9mgll2g5dvf7geas5crlcsie51u518.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.co.weskill.sample",
+            "certificate_hash": "49f4e98ba8ee3126b776573913e5376223f56ca9"
+          }
+        },
+        {
+          "client_id": "439711863661-va82bvrs9kf3oi8jff41j7s2ic61esnv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBlqC7G_Je5Wc8M49r-EWI8lmSAJ9Y1CsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439711863661-va82bvrs9kf3oi8jff41j7s2ic61esnv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
