@@ -1,24 +1,16 @@
 package `in`.co.weskill.sample.ui.home.view
 
-import `in`.co.weskill.sample.data.api.ApiHelperImpl
-import `in`.co.weskill.sample.data.api.RetrofitBuilder
 import `in`.co.weskill.sample.databinding.ActivityHomeBinding
 import `in`.co.weskill.sample.ui.home.viewmodel.HomeActivityVM
-import `in`.co.weskill.sample.utils.Status
-import `in`.co.weskill.sample.utils.ViewModelFactory
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
-import com.google.android.exoplayer2.upstream.DataSource
-import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 
 class HomeActivity : AppCompatActivity(), Player.Listener {
@@ -102,19 +94,19 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
 
     private fun initializePlayer() {
         simpleExoplayer = SimpleExoPlayer.Builder(this).build()
-        binding.exoplayerView.player = simpleExoplayer
-        simpleExoplayer.playWhenReady = playWhenReady
-        simpleExoplayer.seekTo(currentWindow, playbackPosition)
         val mediaItem = MediaItem.fromUri(mp4Url)
         simpleExoplayer.setMediaItem(mediaItem)
         simpleExoplayer.prepare()
+        binding.exoplayerView.player = simpleExoplayer
+        simpleExoplayer.seekTo(currentWindow, playbackPosition)
+        simpleExoplayer.playWhenReady = playWhenReady
     }
 
     private fun releasePlayer() {
         simpleExoplayer.run {
-            playbackPosition = this.currentPosition
-            currentWindow = this.currentWindowIndex
-            playWhenReady = this.playWhenReady
+            playbackPosition = currentPosition
+            currentWindow = currentWindowIndex
+            playWhenReady = playWhenReady
             release()
         }
     }
