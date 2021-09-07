@@ -136,8 +136,20 @@ dependencies {
 
     // endregion
 
+    // Networking
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.0'
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
+
     // player
-    implementation "com.google.android.exoplayer:exoplayer:2.15.0"
+    implementation "com.google.android.exoplayer:exoplayer-core:$exopl_version"
+    implementation "com.google.android.exoplayer:exoplayer-ui:$exopl_version"
+    implementation "com.google.android.exoplayer:exoplayer-dash:$exopl_version"
+//    implementation "com.google.android.exoplayer:exoplayer:$exopl_version"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 

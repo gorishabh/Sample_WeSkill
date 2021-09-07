@@ -1,12 +1,11 @@
 package `in`.co.weskill.sample.ui.setup.view
 
 import `in`.co.weskill.sample.R
-import `in`.co.weskill.sample.ui.home.HomeActivity
+import `in`.co.weskill.sample.ui.home.view.HomeActivity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.google.android.gms.auth.api.signin.GoogleSignIn
