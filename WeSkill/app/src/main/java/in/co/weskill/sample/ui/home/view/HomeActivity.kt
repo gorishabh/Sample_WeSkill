@@ -96,6 +96,7 @@ class HomeActivity : AppCompatActivity(), Player.Listener {
         simpleExoplayer = SimpleExoPlayer.Builder(this).build()
         val mediaItem = MediaItem.fromUri(mp4Url)
         simpleExoplayer.setMediaItem(mediaItem)
+//        simpleExoplayer.addMediaItem()
         simpleExoplayer.prepare()
         binding.exoplayerView.player = simpleExoplayer
         simpleExoplayer.seekTo(currentWindow, playbackPosition)
