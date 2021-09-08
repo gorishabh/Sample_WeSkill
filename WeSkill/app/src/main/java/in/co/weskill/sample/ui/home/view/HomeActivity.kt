@@ -1,5 +1,6 @@
 package `in`.co.weskill.sample.ui.home.view
 
+import `in`.co.weskill.sample.R
 import `in`.co.weskill.sample.databinding.ActivityHomeBinding
 import `in`.co.weskill.sample.ui.home.view.HomeActivity.Companion.TAG
 import `in`.co.weskill.sample.ui.home.viewmodel.HomeActivityVM
@@ -15,6 +16,8 @@ import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.analytics.AnalyticsListener
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector
+import com.google.android.exoplayer2.util.MimeTypes
 import com.google.android.exoplayer2.util.Util
 import timber.log.Timber
 
@@ -100,16 +103,25 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initializePlayer() {
-        simpleExoplayer = SimpleExoPlayer.Builder(this).build()
-        val mediaItem = MediaItem.fromUri(mp4Url)
+        val trackSelector = DefaultTrackSelector(this).apply {
+            setParameters(buildUponParameters().setMaxVideoSizeSd())
+        }
+        simpleExoplayer = SimpleExoPlayer.Builder(this)
+            .setTrackSelector(trackSelector)
+            .build()
+//        val mediaItem = MediaItem.fromUri(mp4Url)
+        val mediaItem = MediaItem.Builder()
+            .setUri(getString(R.string.media_url_dash))
+            .setMimeType(MimeTypes.APPLICATION_MPD)
+            .build()
         simpleExoplayer.setMediaItem(mediaItem)
 //        simpleExoplayer.addMediaItem()
-        simpleExoplayer.prepare()
         binding.exoplayerView.player = simpleExoplayer
         simpleExoplayer.seekTo(currentWindow, playbackPosition)
         simpleExoplayer.playWhenReady = playWhenReady
         simpleExoplayer.addListener(playbackStateListener)
         simpleExoplayer.addAnalyticsListener(analyticsListener)
+        simpleExoplayer.prepare()
     }
 
     private fun releasePlayer() {
@@ -151,7 +163,7 @@ private fun playbackStateListener() = object : Player.Listener {
             ExoPlayer.STATE_ENDED -> "ExoPlayer.STATE_ENDED     -"
             else -> "UNKNOWN_STATE             -"
         }
-        Log.d(TAG , "State changed to $stateString")
+        Log.d(TAG, "State changed to $stateString")
     }
 }
 
@@ -161,7 +173,7 @@ private fun analyticsListener() = object : AnalyticsListener {
         output: Any,
         renderTimeMs: Long
     ) {
-        Log.d(TAG ,"onRenderedFirstFrame")
+        Log.d(TAG, "onRenderedFirstFrame")
     }
 
     override fun onDroppedVideoFrames(
@@ -169,7 +181,7 @@ private fun analyticsListener() = object : AnalyticsListener {
         droppedFrames: Int,
         elapsedMs: Long
     ) {
-        Log.d(TAG ,"onDroppedVideoFrames")
+        Log.d(TAG, "onDroppedVideoFrames")
     }
 
     override fun onAudioUnderrun(
@@ -178,6 +190,6 @@ private fun analyticsListener() = object : AnalyticsListener {
         bufferSizeMs: Long,
         elapsedSinceLastFeedMs: Long
     ) {
-        Log.d(TAG ,"onAudioUnderrun")
+        Log.d(TAG, "onAudioUnderrun")
     }
 }
