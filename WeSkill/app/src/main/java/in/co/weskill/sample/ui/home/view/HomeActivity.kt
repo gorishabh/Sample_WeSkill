@@ -27,7 +27,8 @@ class HomeActivity : AppCompatActivity() {
         }
 
         const val TAG = "HomeActivity"
-        private const val mp4Url: String = "https://html5demos.com/assets/dizzy.mp4"
+//        private const val mp4Url: String = "https://html5demos.com/assets/dizzy.mp4"
+        private const val mp4Url: String = "https://firebasestorage.googleapis.com/v0/b/weskill-4b466.appspot.com/o/Vasavi.mp4?alt=media&token=fbbb3750-fb32-4d5e-ad44-31749628f57e"
         private const val mp3Url: String =
             "https://storage.googleapis.com/exoplayer-test-media-0/play.mp3"
 
